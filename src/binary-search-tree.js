@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/list-tree');
+//const { NotImplementedError } = require('../extensions/list-tree');
 
 // const { Node } = require('../extensions/list-tree.js');
 
@@ -14,34 +14,26 @@ class Node {
   }
 }
 class BinarySearchTree {
-  constructor(data) {
+  constructor() {
     this.root = null;
  }
   root() {
-    this.root = writeRoot(this.root, data);
-    function writeRoot(node, data) {
-    if (!node) {
-      return null;
+      return this._root;
     }
-    else {
-      return node;
-    }
-  }
-}
-  add(date) {
-    this.root = addInsideTree(this.root, date)
-      function addInsideTree(node, date) {
+  add(data) {
+    this.root = addInsideTree(this.root, data)
+      function addInsideTree(node, data) {
           if (!node) {
-              return new Node(date);
+              return new Node(data);
           }
-          if (node.data === date) {
+          if (node.data === data) {
               return node;
           }
-          if (date < node.data){
-              node.left = addInsideTree(node.left, date)
+          if (data < node.data){
+              node.left = addInsideTree(node.left, data)
           }
           else {
-              node.right = addInsideTree(node.right, date)
+              node.right = addInsideTree(node.right, data)
           }
           return node;
       }
@@ -62,17 +54,17 @@ class BinarySearchTree {
     };
   }
   remove(data) {
-    this.root = removeDateTree(this.root, data);
-    function removeDateTree(node, data) {
+    this.root = removeDataTree(this.root, data);
+    function removeDataTree(node, data) {
       if (!node) {
           return null;
       }
       if (data < node.data) {
-          node.left = removeDateTree(node.left, data);
+          node.left = removeDataTree(node.left, data);
           return node;
       }
       else if (node.data < data) {
-          node.right = removeDateTree(node.right, data);
+          node.right = removeDataTree(node.right, data);
           return node;
       } else {
           if (!node.left && !node.right) {
@@ -91,14 +83,14 @@ class BinarySearchTree {
               minimalRight = minimalRight.left;
           }
           node.value = minimalRight.data;
-          node.right = removeDateTree(node.right, minimalRight.data);
+          node.right = removeDataTree(node.right, minimalRight.data);
           return node;
       }
     }
   }
- find(data) {
+ /*find(data) {
     throw new NotImplementedError('Not implemented');
-  }
+  }*/
  min() {
     if (!this.root) {
       return
@@ -120,6 +112,7 @@ class BinarySearchTree {
   return seeker.data;
  }
 }
+const tree = new BinarySearchTree();
 
 module.exports = {
   BinarySearchTree
